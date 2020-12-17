@@ -26,6 +26,17 @@ const LoginForm: React.FC<LoginProps> = ({ titlePhrase, buttonPhrase }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const passwordRef = useRef(null);
+
+  useEffect(() => {
+    if(loggedUser) {
+      setEmail(loggedUser.email);
+      if(passwordRef && passwordRef.current) {
+        passwordRef.current.focus();
+      }
+    }
+  }, [loggedUser])
+
   const handleSubmit = async (evt: React.FormEvent): Promise<void> => {
     evt.preventDefault();
 
@@ -77,9 +88,10 @@ const LoginForm: React.FC<LoginProps> = ({ titlePhrase, buttonPhrase }) => {
                   setPassword(evt.target.value)
                 }
                 required
+                ref={passwordRef}
               />
             </InputGroup>
-            <Button className="btn btn-info mt-3 w-100">{buttonPhrase}</Button>
+            <Button type="submit" className="btn btn-info mt-3 w-100">{buttonPhrase}</Button>
             <br />
             <Link href="/Auth/PasswordRecovery">Esqueci minha senha</Link>{' '}
             <br />
