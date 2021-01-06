@@ -3,8 +3,14 @@ import { InputGroup, FormControl, Row, Col } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import styles from '../../../../styles/AdminTitle.module.css';
+import StyledButton from '../../StyledButton';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
-const SearchAndIcon: React.FC = () => {
+interface SearchAndIcon {
+  icon: IconProp
+}
+
+const SearchAndIcon: React.FC<SearchAndIcon> = ({icon}) => {
   return (
     <Row>
       <Col lg={9} xs>
@@ -26,7 +32,9 @@ const SearchAndIcon: React.FC = () => {
         </Row>
       </Col>
 
-      <Col lg={2} xs={{ span: 3 }}></Col>
+      <Col lg={2} xs={{ span: 3 }} className={styles.titleButton}>
+        <StyledButton icon={icon} type_button="blue" />
+      </Col>
     </Row>
   );
 };
